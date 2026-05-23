@@ -1,0 +1,15 @@
+{
+  "name": "filesure-reminders",
+  "version": "1.0.0",
+  "description": "FileSure GST reminder server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.11.0",
+    "twilio": "^4.19.0",
+    "nodemailer": "^6.9.7",
+    "node-cron": "^3.0.3"
+  }
+}
