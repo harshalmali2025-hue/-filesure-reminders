@@ -142,7 +142,7 @@ const sendReminders = async () => {
 };
 
 // Run every day at 9 AM IST (3:30 AM UTC)
-cron.schedule("*/2 * * * *", sendReminders);
+cron.schedule("30 3 * * *", sendReminders);
 
 // Keep server alive on Render
 const http = require("http");
