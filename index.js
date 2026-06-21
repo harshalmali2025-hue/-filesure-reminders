@@ -86,23 +86,25 @@ const sendReminders = async () => {
     for (const due of dueDates) {
       const diffTime = due.date.getTime() - today.getTime();
       const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-
-      const reminderDays = [];
-      if (user.reminderSettings?.sevenDay !== false) reminderDays.push(7);
-      if (user.reminderSettings?.threeDay !== false) reminderDays.push(3);
-      if (user.reminderSettings?.oneDay !== false) reminderDays.push(1);
+const reminderDays = [];
+if (user.reminderSettings?.sevenDay !== false) reminderDays.push(7);
+if (user.reminderSettings?.threeDay !== false) reminderDays.push(3);
+if (user.reminderSettings?.oneDay !== false) reminderDays.push(1);
+reminderDays.push(0);
 
       if (reminderDays.includes(diffDays)) {
-        const message =
-          `Hi ${user.fullName || "there"},\n\n` +
-          `FileSure Reminder 🔔\n\n` +
-          `${due.label} is due in ` +
-          `${diffDays} day${diffDays > 1 ? "s" : ""}.\n` +
-          `Due Date: ${due.date.toLocaleDateString("en-IN")}\n` +
-          `Late Fee if Missed: ₹50 per day\n\n` +
-          `File now at: https://www.gst.gov.in\n\n` +
-          `— FileSure Team`;
+       const dueDateText = diffDays === 0
+  ? "is due TODAY ⚠️"
+  : `is due in ${diffDays} day${diffDays > 1 ? "s" : ""}`;
 
+const message =
+  `Hi ${user.fullName || "there"},\n\n` +
+  `FileSure Reminder 🔔\n\n` +
+  `${due.label} ${dueDateText}.\n` +
+  `Due Date: ${due.date.toLocaleDateString("en-IN")}\n` +
+  `Late Fee if Missed: ₹50 per day\n\n` +
+  `File now at: https://www.gst.gov.in\n\n` +
+  `— FileSure Team`;
         if (
           user.whatsappNumber &&
           user.reminderSettings?.whatsapp !== false
